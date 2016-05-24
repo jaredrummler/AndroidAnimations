@@ -15,13 +15,7 @@
  *
  */
 
-apply plugin: 'com.jfrog.artifactory'
-apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
-
-def libraryGroupId = 'com.jrummyapps'
-def libraryArtifactId = 'android-animations'
-def libraryVersion = '1.0.0'
 
 android {
     compileSdkVersion 23
@@ -38,62 +32,4 @@ dependencies {
     provided 'com.facebook.rebound:rebound:0.3.8'
 }
 
-publishing {
-    publications {
-        aar(MavenPublication) {
-            groupId libraryGroupId
-            version libraryVersion
-            artifactId libraryArtifactId
-
-            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-            artifact androidJavadocsJar
-            artifact androidSourcesJar
-            pom.withXml {
-                def dependencies = asNode().appendNode('dependencies')
-                configurations.getByName("_releaseCompile").getResolvedConfiguration().getFirstLevelModuleDependencies().each {
-                    def dependency = dependencies.appendNode('dependency')
-                    dependency.appendNode('groupId', it.moduleGroup)
-                    dependency.appendNode('artifactId', it.moduleName)
-                    dependency.appendNode('version', it.moduleVersion)
-                }
-            }
-        }
-    }
-}
-
-artifactory {
-    contextUrl = "${JRUMMYAPPS_ARTIFACTORY_CONTEXT_URL}"
-    publish {
-        repository {
-            repoKey = 'libs-release-local'
-
-            username = "${JRUMMYAPPS_ARTIFACTORY_USERNAME}"
-            password = "${JRUMMYAPPS_ARTIFACTORY_PASSWORD}"
-        }
-        defaults {
-            publications('aar')
-            publishArtifacts = true
-
-            properties = ['qa.level': 'basic', 'q.os': 'android', 'dev.team': 'core']
-            publishPom = true
-        }
-    }
-}
-
-task androidJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    failOnError false
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-    classifier = 'javadoc'
-    from androidJavadocs.destinationDir
-}
-
-task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
-artifactoryPublish.dependsOn('androidSourcesJar', 'androidJavadocsJar', 'androidJavadocs')
+apply from: 'publication.gradle'
