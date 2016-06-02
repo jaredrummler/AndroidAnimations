@@ -29,7 +29,7 @@ android {
 
 dependencies {
     provided 'com.android.support:support-annotations:23.4.0'
-    provided 'com.facebook.rebound:rebound:0.3.8'
+    compile 'com.facebook.rebound:rebound:0.3.8'
 }
 
 apply from: 'publication.gradle'
