@@ -1,7 +1,30 @@
 # AndroidAnimations
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/android-animations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/android-animations)
+[![License](http://img.shields.io/:license-apache-blue.svg)](LICENSE)
+[![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=14) 
+[![Twitter Follow](https://img.shields.io/twitter/follow/jrummy16.svg?style=social)](https://twitter.com/jrummy16)
+
 A bunch of fun animations for Android.
 
 This project is based on [AndroidViewAnimations](https://github.com/daimajia/AndroidViewAnimations) and [AnimationEasingFunctions](https://github.com/daimajia/AnimationEasingFunctions) by [daimajia](https://github.com/daimajia). It was re-written for simplicity and to remove the dependency on noneoldandroids. #enumsmatter.
+
+# Download
+
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/android-animations/1.0.0/android-animations-1.0.0.aar) or grab via Gradle:
+
+```groovy
+compile 'com.jaredrummler:android-animations:1.0.0'
+```
+or Maven:
+```xml
+<dependency>
+  <groupId>com.jaredrummler</groupId>
+  <artifactId>android-animations</artifactId>
+  <version>1.0.0</version>
+  <type>aar</type>
+</dependency>
+```
 
 # Technique
 

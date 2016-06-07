@@ -33,4 +33,4 @@ dependencies {
 }
 
 //apply from: 'publication.gradle'
-apply from: 'gradle-mvn-push.gradle'
+//apply from: 'gradle-mvn-push.gradle'
