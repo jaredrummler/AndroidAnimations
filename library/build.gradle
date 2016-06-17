@@ -8,11 +8,21 @@ android {
     minSdkVersion 11
     targetSdkVersion 24
   }
+
+  lintOptions {
+    abortOnError false
+  }
+}
+
+configurations {
+  javadocDeps
 }
 
 dependencies {
-  provided 'com.android.support:support-annotations:24.0.0'
+  compile 'com.android.support:support-annotations:24.0.0'
   compile 'com.facebook.rebound:rebound:0.3.8'
+  javadocDeps 'com.android.support:support-annotations:24.0.0'
+  javadocDeps 'com.facebook.rebound:rebound:0.3.8'
 }
 
 //apply from: 'publication.gradle'
