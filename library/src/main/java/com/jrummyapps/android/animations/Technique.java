@@ -20,6 +20,8 @@ package com.jrummyapps.android.animations;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
+import android.os.Build.VERSION_CODES;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
@@ -945,44 +947,108 @@ public enum Technique {
     }
   };
 
+  /**
+   * Get the animator
+   *
+   * @return A new {@link SimpleAnimator}
+   */
   public abstract SimpleAnimator getAnimator();
 
+  /**
+   * Compose a new animation.
+   *
+   * @return A {@link Composer} object used to set the duration, delay, and other parameters for the animation.
+   */
   public Composer getComposer() {
     return new Composer(getAnimator());
   }
 
+  /**
+   * Plays the animation on the target view. The default duration is 1 second.
+   *
+   * @param target
+   *     the view to play the animation on.
+   * @return the animation's {@link Controller} which contains methods to stop or check if the animation is running.
+   */
   public Controller playOn(View target) {
     return getComposer().playOn(target);
   }
 
+  /**
+   * An abstract class used in each {@link Technique} that plays a set of animations on a view. The class also allows you to
+   * set listeners on the animation, delays, duration, etc.
+   */
   public static abstract class SimpleAnimator {
 
     private final AnimatorSet animatorSet = new AnimatorSet();
     private long duration = 1000;
     private View target;
 
+    /**
+     * Sets up the {@link AnimatorSet} to play the animations on the view.
+     *
+     * @param target
+     *     the view
+     */
     protected abstract void prepare(View target);
 
+    /**
+     * Set the start delay
+     *
+     * @param startDelay
+     *     time in milliseconds to wait until playing the animation.
+     * @return this {@link SimpleAnimator} object for chaining method calls
+     */
     public SimpleAnimator setStartDelay(long startDelay) {
       animatorSet.setStartDelay(startDelay);
       return this;
     }
 
+    /**
+     * Adds a listener to the set of listeners that are sent events through the life of an animation, such as start, repeat, and
+     * end.
+     *
+     * @param listener
+     *     the listener to be added to the current set of listeners for this animation.
+     * @return this {@link SimpleAnimator} object for chaining method calls
+     */
     public SimpleAnimator addAnimatorListener(Animator.AnimatorListener listener) {
       animatorSet.addListener(listener);
       return this;
     }
 
+    /**
+     * Sets the {@link android.animation.TimeInterpolator} for all current child animations of this {@link AnimatorSet}.
+     *
+     * @param interpolator
+     *     the interpolator to be used by each child animation of this AnimatorSet
+     * @return this {@link SimpleAnimator} object for chaining method calls
+     */
     public SimpleAnimator setInterpolator(Interpolator interpolator) {
       animatorSet.setInterpolator(interpolator);
       return this;
     }
 
+    /**
+     * Set the duration of the animation.
+     *
+     * @param duration
+     *     the duration in milliseconds
+     * @return this {@link SimpleAnimator} object for chaining method calls
+     */
     public SimpleAnimator setDuration(long duration) {
       this.duration = duration;
       return this;
     }
 
+    /**
+     * Adds a collection of listeners to the set of listeners that are sent events through the life of an animation, such as
+     * start, repeat, and end.
+     *
+     * @param callbacks
+     *     a collection of listeners to be added to the current set of listeners for this animation.
+     * @return this {@link SimpleAnimator} object for chaining method calls
+     */
     public SimpleAnimator setCallbacks(List<Animator.AnimatorListener> callbacks) {
       if (callbacks != null && !callbacks.isEmpty()) {
         for (Animator.AnimatorListener callback : callbacks) {
@@ -992,11 +1058,21 @@ public enum Technique {
       return this;
     }
 
+    /**
+     * Set the view to play the animation on.
+     *
+     * @param target
+     *     a {@link View}
+     * @return this {@link SimpleAnimator} object for chaining method calls
+     */
     public SimpleAnimator setTarget(View target) {
       this.target = target;
       return this;
     }
 
+    /**
+     * Reset the view to default values.
+     */
     public void reset() {
       target.setAlpha(1);
       target.setScaleX(1);
@@ -1010,6 +1086,11 @@ public enum Technique {
       target.setPivotY(target.getMeasuredHeight() / 2.0f);
     }
 
+    /**
+     * Start playing the animation
+     *
+     * @return the animation's {@link Controller} which contains methods to stop or check if the animation is running.
+     */
     public Controller start() {
       reset();
       prepare(target);
@@ -1018,16 +1099,25 @@ public enum Technique {
       return new Controller(this);
     }
 
+    /**
+     * @return this animations' {@link AnimatorSet}.
+     */
     public AnimatorSet getAnimatorSet() {
       return animatorSet;
     }
 
+    /**
+     * @return the {@link View} to play the animation on.
+     */
     public View getTarget() {
       return target;
     }
 
   }
 
+  /**
+   * A class to compose/build a {@link SimpleAnimator}.
+   */
   public static final class Composer {
 
     private final List<Animator.AnimatorListener> callbacks = new ArrayList<>();
@@ -1040,26 +1130,60 @@ public enum Technique {
       this.animator = animator;
     }
 
+    /**
+     * Set the duration of the animation.
+     *
+     * @param duration
+     *     the duration in milliseconds
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer duration(long duration) {
       this.duration = duration;
       return this;
     }
 
+    /**
+     * Set the start delay
+     *
+     * @param delay
+     *     time in milliseconds to wait until playing the animation.
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer delay(long delay) {
       this.delay = delay;
       return this;
     }
 
+    /**
+     * Sets the {@link android.animation.TimeInterpolator} for all current child animations of this {@link AnimatorSet}.
+     *
+     * @param interpolator
+     *     the interpolator to be used by each child animation of this AnimatorSet
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer interpolate(Interpolator interpolator) {
       this.interpolator = interpolator;
       return this;
     }
 
+    /**
+     * Adds a listener to the set of listeners that are sent events through the life of an animation, such as start, repeat, and
+     * end.
+     *
+     * @param listener
+     *     the listener to be added to the current set of listeners for this animation.
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer withListener(Animator.AnimatorListener listener) {
       callbacks.add(listener);
       return this;
     }
 
+    /**
+     * Sets the target view's visibility to {@link View#GONE} when the animation is finished.
+     *
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer hideOnFinished() {
       return onEnd(new AnimatorCallback() {
 
@@ -1069,6 +1193,11 @@ public enum Technique {
       });
     }
 
+    /**
+     * Sets the target view's visibility to {@link View#VISIBLE} before playing the animation.
+     *
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer showOnStart() {
       return onStart(new AnimatorCallback() {
 
@@ -1078,6 +1207,13 @@ public enum Technique {
       });
     }
 
+    /**
+     * Add a callback that is invoked when the animation starts.
+     *
+     * @param callback
+     *     the {@link AnimatorCallback}
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer onStart(final AnimatorCallback callback) {
       callbacks.add(new EmptyAnimatorListener() {
 
@@ -1088,6 +1224,13 @@ public enum Technique {
       return this;
     }
 
+    /**
+     * Add a callback that is invoked when the animation finishes.
+     *
+     * @param callback
+     *     the {@link AnimatorCallback}
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer onEnd(final AnimatorCallback callback) {
       callbacks.add(new EmptyAnimatorListener() {
 
@@ -1098,6 +1241,13 @@ public enum Technique {
       return this;
     }
 
+    /**
+     * Add a callback that is invoked when the animation is cancelled.
+     *
+     * @param callback
+     *     the {@link AnimatorCallback}
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer onCancel(final AnimatorCallback callback) {
       callbacks.add(new EmptyAnimatorListener() {
 
@@ -1108,6 +1258,13 @@ public enum Technique {
       return this;
     }
 
+    /**
+     * Add a callback that is invoked when the animation is repeated.
+     *
+     * @param callback
+     *     the {@link AnimatorCallback}
+     * @return this {@link Composer} object for chaining method calls.
+     */
     public Composer onRepeat(final AnimatorCallback callback) {
       callbacks.add(new EmptyAnimatorListener() {
 
@@ -1118,6 +1275,13 @@ public enum Technique {
       return this;
     }
 
+    /**
+     * Play the animation
+     *
+     * @param target
+     *     the view to play the animation on.
+     * @return the animation's {@link Controller} which contains methods to stop or check if the animation is running.
+     */
     public Controller playOn(View target) {
       return animator.setTarget(target)
           .setDuration(duration)
@@ -1129,6 +1293,9 @@ public enum Technique {
 
   }
 
+  /**
+   * Allows you to stop the animation and check if the animation has started and is running.
+   */
   public static final class Controller {
 
     private final SimpleAnimator animator;
@@ -1137,14 +1304,36 @@ public enum Technique {
       this.animator = animator;
     }
 
+    /**
+     * Returns whether this Animator has been started and not yet ended.
+     *
+     * @return Whether the Animator has been started and not yet ended.
+     */
+    @TargetApi(VERSION_CODES.ICE_CREAM_SANDWICH)
     public boolean isStarted() {
       return animator.getAnimatorSet().isStarted();
     }
 
+    /**
+     * Returns {@code true} if any of the child animations of this AnimatorSet have been started and have not yet ended.
+     *
+     * @return Whether this AnimatorSet has been started and has not yet ended.
+     */
     public boolean isRunning() {
       return animator.getAnimatorSet().isRunning();
     }
 
+    /**
+     * <p>Cancels the animation. Unlike end(), cancel() causes the animation to stop in its tracks, sending an
+     * onAnimationCancel(Animator) to its listeners, followed by an onAnimationEnd(Animator) message.</p>
+     *
+     * <p>This method must be called on the thread that is running the animation.</p>
+     *
+     * <p>Note that canceling a AnimatorSet also cancels all of the animations that it is responsible for.</p>
+     *
+     * @param reset
+     *     {@code true} to reset the view to default values after cancelling.
+     */
     public void stop(boolean reset) {
       animator.getAnimatorSet().cancel();
       if (reset) {
@@ -1154,8 +1343,15 @@ public enum Technique {
 
   }
 
+  /**
+   * A callback that is invoked from a {@link Animator.AnimatorListener}.
+   */
   public interface AnimatorCallback {
 
+    /**
+     * @param animator
+     *     the animation
+     */
     void call(SimpleAnimator animator);
   }
 

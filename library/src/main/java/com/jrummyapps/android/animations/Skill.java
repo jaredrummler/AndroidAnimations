@@ -17,6 +17,7 @@
 
 package com.jrummyapps.android.animations;
 
+import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
@@ -375,12 +376,39 @@ public enum Skill {
     }
   };
 
+  /**
+   * Get the {@link EasingMethod} for this {@link Skill}.
+   *
+   * @param duration
+   *     the duration of the animation
+   * @return the {@link EasingMethod}
+   */
   public abstract EasingMethod getMethod(float duration);
 
+  /**
+   * Get the {@link ValueAnimator} for this {@link Skill}.
+   *
+   * @param duration
+   *     the duration of the animation
+   * @param animator
+   *     an animator, usually an {@link ObjectAnimator}, to set the {@link EasingMethod} on.
+   * @return the {@link ValueAnimator}
+   */
   public ValueAnimator glide(float duration, ValueAnimator animator) {
     return glide(duration, animator, (EasingMethod.EasingListener[]) null);
   }
 
+  /**
+   * Get the {@link ValueAnimator} for this {@link Skill}.
+   *
+   * @param duration
+   *     the duration of the animation
+   * @param animator
+   *     an animator, usually an {@link ObjectAnimator}, to set the {@link EasingMethod} on.
+   * @param listeners
+   *     the animation listeners
+   * @return the {@link ValueAnimator}
+   */
   public ValueAnimator glide(float duration, ValueAnimator animator, EasingMethod.EasingListener... listeners) {
     EasingMethod method = getMethod(duration);
     if (listeners != null && listeners.length > 0) {
@@ -390,6 +418,15 @@ public enum Skill {
     return animator;
   }
 
+  /**
+   * Get the {@link PropertyValuesHolder} for this {@link Skill}.
+   *
+   * @param duration
+   *     the duration of the animation
+   * @param propertyValuesHolder
+   *     an animator to set the {@link EasingMethod} on.
+   * @return the {@link PropertyValuesHolder}
+   */
   public PropertyValuesHolder glide(float duration, PropertyValuesHolder propertyValuesHolder) {
     propertyValuesHolder.setEvaluator(getMethod(duration));
     return propertyValuesHolder;
@@ -405,22 +442,49 @@ public enum Skill {
       this.duration = duration;
     }
 
+    /**
+     * Add a listener to the animator
+     *
+     * @param listener
+     *     the {@link EasingListener}
+     */
     public void addEasingListener(EasingListener listener) {
       listeners.add(listener);
     }
 
+    /**
+     * Add listeners to the animator.
+     *
+     * @param listeners
+     *     the {@link EasingListener}(s)
+     */
     public void addEasingListeners(EasingListener... listeners) {
       Collections.addAll(this.listeners, listeners);
     }
 
+    /**
+     * Remove a listener.
+     *
+     * @param listener
+     *     The listener to remove.
+     */
     public void removeEasingListener(EasingListener listener) {
       listeners.remove(listener);
     }
 
+    /**
+     * Clear all listeners.
+     */
     public void clearEasingListeners() {
       listeners.clear();
     }
 
+    /**
+     * Set the duration of the animation.
+     *
+     * @param duration
+     *     the time in milliseconds.
+     */
     public void setDuration(float duration) {
       this.duration = duration;
     }
