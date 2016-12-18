@@ -8,10 +8,6 @@ android {
     minSdkVersion 11
     targetSdkVersion 25
   }
-
-  lintOptions {
-    abortOnError false
-  }
 }
 
 dependencies {
@@ -19,5 +15,5 @@ dependencies {
   compile 'com.facebook.rebound:rebound:0.3.8'
 }
 
-//apply from: 'publication.gradle'
-//apply from: 'gradle-mvn-push.gradle'
+//apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/artifactory/publication.gradle'
+//apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/maven/gradle-mvn-push.gradle'
