@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.jrummyapps.android.animations.demo.skill;
+package com.jaredrummler.android.animations.demo.skill;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -24,8 +23,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.jrummyapps.android.animations.Skill;
-import com.jrummyapps.android.animations.demo.R;
+import com.jaredrummler.android.animations.Skill;
+import com.jaredrummler.android.animations.demo.R;
 
 import java.util.Locale;
 

@@ -1,9 +1,9 @@
 # AndroidAnimations
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/android-animations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/android-animations)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/android-animations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/android-animations)
 [![License](http://img.shields.io/:license-apache-blue.svg)](LICENSE)
 [![API](https://img.shields.io/badge/API-11%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=11) 
-[![Twitter Follow](https://img.shields.io/twitter/follow/jrummyapps.svg?style=social)](https://twitter.com/jrummyapps)
+[![Twitter Follow](https://img.shields.io/twitter/follow/jaredrummler.svg?style=social)](https://twitter.com/jaredrummler)
 
 A bunch of fun animations for Android.
 
@@ -11,15 +11,15 @@ This project is based on [AndroidViewAnimations](https://github.com/daimajia/And
 
 # Download
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/android-animations/1.0.0/android-animations-1.0.0.aar) or grab via Gradle:
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/android-animations/1.0.0/android-animations-1.0.0.aar) or grab via Gradle:
 
 ```groovy
-compile 'com.jrummyapps:android-animations:1.0.0'
+compile 'com.jaredrummler:android-animations:1.0.0'
 ```
 or Maven:
 ```xml
 <dependency>
-  <groupId>com.jrummyapps</groupId>
+  <groupId>com.jaredrummler</groupId>
   <artifactId>android-animations</artifactId>
   <version>1.0.0</version>
   <type>aar</type>

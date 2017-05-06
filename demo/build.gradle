@@ -5,7 +5,7 @@ android {
   buildToolsVersion "25.0.2"
 
   defaultConfig {
-    applicationId "com.jrummyapps.android.animations.demo"
+    applicationId "com.jaredrummler.android.animations.demo"
     minSdkVersion 14
     targetSdkVersion 25
     versionCode 1
@@ -20,6 +20,6 @@ android {
 }
 
 dependencies {
-  compile 'com.android.support:appcompat-v7:25.1.0'
+  compile 'com.android.support:appcompat-v7:25.3.1'
   compile project(':library')
 }

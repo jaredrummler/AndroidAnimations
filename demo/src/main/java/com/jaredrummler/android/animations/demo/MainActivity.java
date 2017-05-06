@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.jrummyapps.android.animations.demo;
+package com.jaredrummler.android.animations.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,10 +22,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.jrummyapps.android.animations.Rebound;
-import com.jrummyapps.android.animations.demo.rebound.ReboundDemoActivity;
-import com.jrummyapps.android.animations.demo.skill.SkillDemoActivity;
-import com.jrummyapps.android.animations.demo.technique.TechniqueDemoActivity;
+import com.jaredrummler.android.animations.Rebound;
+import com.jaredrummler.android.animations.demo.rebound.ReboundDemoActivity;
+import com.jaredrummler.android.animations.demo.skill.SkillDemoActivity;
+import com.jaredrummler.android.animations.demo.technique.TechniqueDemoActivity;
 
 public class MainActivity extends AppCompatActivity {
 

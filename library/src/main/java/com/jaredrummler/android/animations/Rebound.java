@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 JRummy Apps Inc.
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.jrummyapps.android.animations;
+package com.jaredrummler.android.animations;
 
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -23,7 +22,7 @@ import android.view.View;
 import com.facebook.rebound.SimpleSpringListener;
 import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringSystem;
-import com.jrummyapps.android.listeners.TouchReleaseListener;
+import com.jaredrummler.android.listeners.TouchReleaseListener;
 
 import java.lang.ref.WeakReference;
 

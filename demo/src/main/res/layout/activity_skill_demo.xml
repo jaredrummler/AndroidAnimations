@@ -27,7 +27,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".skill.SkillDemoActivity">
 
-  <com.jrummyapps.android.animations.demo.skill.DrawView
+  <com.jaredrummler.android.animations.demo.skill.DrawView
       android:id="@+id/history"
       android:layout_width="match_parent"
       android:layout_height="280dp"/>
